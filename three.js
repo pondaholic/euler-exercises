@@ -18,27 +18,38 @@ function prime(number) {
 }
 
 function findLargestPrime(number) {
+	//eratosthenes' sieve:
+	let half = Math.ceil(number / 2);
 	let largestPrime = 0;
-	half = Math.ceil(number / 2);
-	for (let i = half; i > 2; i--) {
-		// console.log(half);
-		if (number % i === 0 && prime(i)) {
-			// console.log('prime');
-			return (largestPrime = i);
+	for (let i = number; i > half; i--) {
+		for (let j = 2; j < half; j++) {
+			if (prime(j) && i % j != 0 && prime(i) && number % i === 0) {
+				return (largestPrime = i);
+			}
 		}
 	}
-
-	// if (!prime(number)) {
-	// 	half = Math.ceil(number / 2);
-	// 	for (let i = half; i > 2; i--) {
-	// 		// console.log(half);
-	// 		if (number % i === 0 && prime(i)) {
-	// 			// console.log('prime');
-	// 			return (largestPrime = i);
+	// half = Math.ceil(number / 2);
+	// quarter = Math.ceil(half / 2);
+	// let largestPrime = 0;
+	// for (let i = 2; i < quarter; i++) {
+	// 	console.log('dividing by: ', i);
+	// 	if (number % i === 0) {
+	// 		x = number / i;
+	// 		if (prime(x)) {
+	// 			return (largestPrime = x);
+	// 		}
+	// 		return x;
+	// 	}
+	// 	if (largestPrime === 0) {
+	// 		for (let j = half; j > quarter; j++) {
+	// 			if (number % j === 0 && prime(j)) {
+	// 				return (largestPrime = j);
+	// 			}
 	// 		}
 	// 	}
 	// }
-	return largestPrime;
+	// console.log('not prime');
+	return `Largest Prime is: ${largestPrime}`;
 }
 
 // prime(2);
